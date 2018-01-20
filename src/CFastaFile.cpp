@@ -130,6 +130,10 @@ unsigned char * CFastaFile::nextSeq(int *length, int* alignedLength, int pad) {
 			fprintf(stderr, "it is impossible\n");
 			goto err;
 		}
+		if (pos >= MAX_SEQ_LENGTH) {
+			fprintf(stderr, "Sequence '%s' exceeds the size limit of %d \n", name, MAX_SEQ_LENGTH);
+			goto err;
+		}
 		//remove the newline
 		p = buf + pos;
 		for (; *p && (*p != '\r' && *p != '\n'); p++) {
